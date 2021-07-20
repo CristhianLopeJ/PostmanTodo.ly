@@ -175,7 +175,7 @@
 									"\r",
 									"//Five Test\r",
 									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"       pm.expect(pm.response.responseTime).to.below(3000);\r",
 									"});\r",
 									""
 								],
