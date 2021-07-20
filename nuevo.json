@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "943a6b21-8282-4a4c-a2ac-337725314633",
+		"name": "PrimeraPrueba",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//First test \r",
+									"const bodyRequest = pm.request.body;\r",
+									"console.log(bodyRequest)\r",
+									"const jsonBodyRequest = JSON.parse(bodyRequest);\r",
+									"pm.test(\"This Test verify if a correct email is entered\",function(){\r",
+									"    pm.expect(jsonBodyRequest.Email).to.include(\"@\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Email\": \"45678s@email.com\",\r\n   \"FullName\": \"te\",\r\n   \"Password\": \"te\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://todo.ly/"
+		}
+	]
+}
