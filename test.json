@@ -1,0 +1,1387 @@
+{
+	"info": {
+		"_postman_id": "284c66de-48a2-425c-8328-24e5cfa54aa8",
+		"name": "This is a test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Filters api Methods",
+			"item": [
+				{
+					"name": "List of filters",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/filters.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"filters.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/filters/0.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"filters",
+								"0.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Items of a Filter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/filters/-3/items.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"filters",
+								"-3",
+								"items.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//First test \r",
+									"const bodyRequest = pm.request.body;\r",
+									"console.log(bodyRequest)\r",
+									"const jsonBodyRequest = JSON.parse(bodyRequest);\r",
+									"pm.test(\"This Test verify if a correct email is entered\",function(){\r",
+									"    pm.expect(jsonBodyRequest.Email).to.include(\"@\");\r",
+									"});\r",
+									"\r",
+									"//Second test\r",
+									"pm.test(\"test body response if the property <FullName>is a String \",function(){\r",
+									"    const bodyResponse = pm.response.json();\r",
+									"    pm.expect(bodyResponse.Email).to.eq(\"nuevoemail3@email.com\");\r",
+									"});\r",
+									"\r",
+									"//Third Test\r",
+									"pm.test('Test if Fullname is a String',function(){\r",
+									"    const bodyResponse = pm.response.json();\r",
+									"    pm.expect(bodyResponse.FullName).is.a(\"String\")\r",
+									"});\r",
+									"\r",
+									"//Fourth Test\r",
+									"pm.test(\"Test if a status code has a String = OK\", function () {\r",
+									"    const status = pm.response.status;\r",
+									"    pm.expect(status).to.eq('OK');\r",
+									"    pm.expect(status).is.a('string');\r",
+									"});\r",
+									"\r",
+									"//Five Test\r",
+									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Email\": \"testtest@email.com\",\r\n   \"FullName\": \"te\",\r\n   \"Password\": \"te\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//First test\r",
+									"const authRequest = pm.request.auth;\r",
+									"console.log(authRequest);\r",
+									"pm.test('Test if the auth is of type: basic',function(){\r",
+									"    pm.expect(authRequest.type).is.eq(\"basic\");\r",
+									"})\r",
+									"\r",
+									"//Secont test\r",
+									"pm.test(\"Content-Type header is present\", function() {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Third Test\r",
+									"pm.test('Test if the status code is 200',function(){\r",
+									"    const statusCode = pm.response.code;\r",
+									"    pm.expect(statusCode).to.equal(200);\r",
+									"    pm.expect(statusCode).is.a('number');\r",
+									"});\r",
+									"\r",
+									"//fourth Test\r",
+									"pm.test(\"Test if a status code has a String = OK\", function () {\r",
+									"    const status = pm.response.status;\r",
+									"    pm.expect(status).to.eq('OK');\r",
+									"    pm.expect(status).is.a('string');\r",
+									"});\r",
+									"\r",
+									"//Five Test\r",
+									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "te",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nue123@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// First Test\r",
+									"const bodyResponse = pm.response.json();\r",
+									"pm.test('User delete correctly or not ', function(){\r",
+									"    if (bodyResponse['Id']) {\r",
+									"        pm.expect(bodyResponse['Password']).is.null;\r",
+									"    } else {\r",
+									"        pm.expect(bodyResponse['ErrorCode']).to.eq(105);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Second Test\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+									"});\r",
+									"\r",
+									"//Third Test\r",
+									"pm.test('Test if the status code is 200',function(){\r",
+									"    const statusCode = pm.response.code;\r",
+									"    pm.expect(statusCode).to.equal(200);\r",
+									"    pm.expect(statusCode).is.a('number');\r",
+									"});\r",
+									"\r",
+									"//Fourth test\r",
+									"pm.test(\"Test if a status code has a String = OK\", function () {\r",
+									"    const status = pm.response.status;\r",
+									"    pm.expect(status).to.eq('OK');\r",
+									"    pm.expect(status).is.a('string');\r",
+									"});\r",
+									"\r",
+									"//Five test\r",
+									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "nuevo23@email.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/0.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"0.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//First Test\r",
+									"pm.test(\"Should test if Content-Type header is an application/json\", function() {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Second Test\r",
+									"const bodyResponse = pm.response.json();\r",
+									"pm.test('Should Update User Correctly if user send an auth correctly ', function(){\r",
+									"    if (bodyResponse['Id']) {\r",
+									"        pm.expect(bodyResponse['Password']).is.null;\r",
+									"    } else {\r",
+									"        pm.expect(bodyResponse['ErrorMessage']).to.eq(\"Account doesn't exist\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Third Test\r",
+									"pm.test(\"Test if a status code has a String = OK\", function () {\r",
+									"    const status = pm.response.status;\r",
+									"    pm.expect(status).to.eq('OK');\r",
+									"    pm.expect(status).is.a('string');\r",
+									"});\r",
+									"\r",
+									"//Fourth Test\r",
+									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "nuevo25@email.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Email\": \"25nuevo@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/0.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"0.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "New Project Created",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const bodyResponse = pm.response.json();\r",
+									"\r",
+									"pm.test('test create user or user already exist', function(){\r",
+									"    if (bodyResponse['Id']) {\r",
+									"        pm.expect(bodyResponse['Password']).is.null;\r",
+									"    } else {\r",
+									"        pm.expect(bodyResponse['ErrorCode']).to.eq(201);\r",
+									"    }\r",
+									"});\r",
+									"pm.test('test create user or user already exist', function(){\r",
+									"   pm.expect(bodyResponse.Id).exist;\r",
+									"   const statusCode = pm.response.code;\r",
+									"   pm.response(statusCode.code).to.eq(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test if the status code is 200',function(){\r",
+									"    const statusCode = pm.response.code;\r",
+									"    pm.expect(statusCode).to.equal(200);\r",
+									"    pm.expect(statusCode).is.a('number');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test if a status code has a String = OK\", function () {\r",
+									"    const status = pm.response.status;\r",
+									"    pm.expect(status).to.eq('OK');\r",
+									"    pm.expect(status).is.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test if the response time is below than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.below(3000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "nue123@email.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "te",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Content\": \"My Neww\",\r\n   \"Icon\": \"45\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/projects.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "liliana123@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/projects.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/projects.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project by Id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Icon\": \"78\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/projects/3926116.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"3926116.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project by Id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/projects/3926147.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"3926147.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get items of a project",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/projects/3925865/items.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"3925865",
+								"items.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Done Items of a Project",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/projects/3925865/doneitems.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"3925865",
+								"doneitems.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "nue123@email.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "te",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"Content\": \"nuevooo\",\r\n\"Icon\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Delete TOkenFailed",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "nuevonn@email.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "3ad5cc5469604f0ea9e5f5f7bf6aaa4d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/authentication/token.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"token.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetToken",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevonn@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/authentication/token.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"token.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "Create Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//First Test\r",
+									"const bodyResponse = pm.response.json();\r",
+									"pm.test(\"System should show an ID when an Item is created\", function(){\r",
+									"    const idInString = bodyResponse.Id.toString();\r",
+									"    pm.expect(idInString).to.include('1');\r",
+									"});\r",
+									"\r",
+									"//Second Test\r",
+									"pm.test(\"Shoud test if a OwnerId is the same\", function(){\r",
+									"    const ownerIdToString = bodyResponse.OwnerId.toString();\r",
+									"    pm.expect(ownerIdToString).include('6');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Third Test\r",
+									"pm.test(\"Should show status code 200 when an item is created\", function(){\r",
+									"    const statusCode = pm.response.code;\r",
+									"    pm.expect(statusCode).eq(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "te",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nue1234@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Content\": \"FirsItem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const bodyResponse = pm.response.json();\r",
+									"pm.test(\"First value in the ID in this this object is 10904925\", function () {\r",
+									"     \r",
+									"    pm.expect(bodyResponse[0].Id).to.eql(10904925);\r",
+									" });\r",
+									"pm.test(\"Second content value is Item-1\", function () {\r",
+									"    pm.expect(bodyResponse[1].Content).to.eql(\"FirsItem\");\r",
+									" });\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    });\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "te",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nue1234@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Items by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const bodyResponse = pm.response.json();\r",
+									"pm.test(\"Id sent in the endPoint should be the same number in the body response\",function(){\r",
+									"    pm.expect(bodyResponse['Id']).is.eq(10904029);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Should show a Content with valule 'two' \", function () {\r",
+									"    pm.expect(bodyResponse.Content).to.include(\"two\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items/10904029.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"10904029.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const bodyResponse =pm.response.json();\r",
+									"pm.test('This test verify if the property Content include a word with em',function(){\r",
+									"    pm.expect(bodyResponse.Content).include(\"em\");\r",
+									"});\r",
+									"pm.test('This test verify if Children is an array',function(){\r",
+									"    pm.expect(bodyResponse.Children).is.an('array')\r",
+									"});\r",
+									"pm.test(\"This test verify if DueDateTime is Null\",function(){\r",
+									"    pm.expect(bodyResponse.DueDateTime).is.null;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Content\": \"item6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items/10904027.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"10904027.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item by ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Content\": \"item-987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items/10904021.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"10904021.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Done root item",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Content\": \"item-987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/API/Items/10903133/DoneRootItem.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"Items",
+								"10903133",
+								"DoneRootItem.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Root item by child Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "cris1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "nuevon8@email.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Content\": \"item-987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/API/Items/10903133/RootItem.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"Items",
+								"10903133",
+								"RootItem.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://todo.ly/"
+		}
+	]
+}
